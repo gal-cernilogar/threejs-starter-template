@@ -3,6 +3,7 @@ import Camera from './camera';
 import Scene from './scene';
 import Controls from './tools/controls'
 import Clock from './tools/clock'
+import Stats from './tools/stats'
 
 export default class ThreeApp {
   private renderer;
@@ -11,6 +12,8 @@ export default class ThreeApp {
   private clock;
   private controls;
 
+  private stats;
+
   constructor(domContainer: HTMLElement) {
     this.renderer = new Renderer(domContainer);
     this.camera = new Camera(domContainer);
@@ -18,6 +21,8 @@ export default class ThreeApp {
     this.controls = new Controls(this.camera, this.renderer.domElement);
     this.clock = new Clock();
 
+    this.stats = new Stats();
+    domContainer.appendChild(this.stats.dom)
   }
 
   update() {
@@ -26,6 +31,8 @@ export default class ThreeApp {
     this.scene.update(dt);
     this.controls.update();
     this.renderer.render(this.scene, this.camera);
+
+    this.stats.update()
   }
 
   run() {
