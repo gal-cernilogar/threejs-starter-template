@@ -1,15 +1,15 @@
-import createApp from "./app";
+import ThreeApp from "./three-app";
 
-const appContainer = document.getElementById('app');
+const threeAppContainer = document.getElementById('three-app');
 
-if (appContainer) {
-  const app = createApp(appContainer);
+if (threeAppContainer) {
+  const threeApp = new ThreeApp(threeAppContainer);
 
-  const appResizeObserver = new ResizeObserver(entries => {
-    entries.forEach(entry => app.handleAppResize(entry.target));
+  const threeAppResizeObserver = new ResizeObserver(entries => {
+    entries.forEach(entry => threeApp.handleResize(entry.target));
   });
   
-  appResizeObserver.observe(appContainer);
+  threeAppResizeObserver.observe(threeAppContainer);
 
-  app.run();
+  threeApp.run();
 }
